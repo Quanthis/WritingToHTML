@@ -10,7 +10,7 @@ namespace WritingToHTML
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)                                                         //remember to change output path
         {
             /* StringWriter sw = new StringWriter(@"C:\tmp\test\xml");
             using (XmlTextWriter writer = new XmlTextWriter(sw))
@@ -18,61 +18,29 @@ namespace WritingToHTML
                 sw.WriteLine("Test");
             }*/
 
-            string sampleCreationString = @"
-        <html>
-        <head>
-        Head is here!
-        </head>
+            StringBuilder sampleCreationString = new StringBuilder("");
+            StringBuilder CssBuilder = new StringBuilder("");
 
-        <body>
-        <h1>Sekcja 4</h1>
-        <Table>
+            #region DownloadingData
+            using (FileStream fs = new FileStream(@"HTML_CSS\HTMLPage1.html", FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+                {
+                    sampleCreationString.Append(sr.ReadToEnd());
+                }
+            }
 
-            <TR>
-
-                <TH> Broń </TH>
-
-                <TH> Moc<TH>
-                <TH> Element </TH>
-
-            </TR>
-
-            <TR>
-
-                <td> ApoCaster </td>
-
-                <td> 431 </ td>
-
-                <td> 0 </td>
-
-            </tr>
-
-            <tr>
-
-                <td> SpecterBuster </td>
-
-                <td> 560 </td>
-
-                <td> 150 </td>
-
-            </tr>
-
-            <tr>
-
-                <td> AmaranthineSlasher </td>
-
-                <td> 700 </td>
-
-                <td> 300 </td>
-
-            <tr>
-
-        </Table> 
-        </body>
-        </html>";
+            using (FileStream fs = new FileStream(@"HTML_CSS\Style.css", FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+                {
+                    CssBuilder.Append(sr.ReadToEnd());
+                }
+            }
+            #endregion
 
 
-
+            #region CreateFiles
             using (FileStream fs = new FileStream(@"C:\tmp\test.html", FileMode.Create))
             {
                 using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
@@ -80,6 +48,16 @@ namespace WritingToHTML
                     sw.WriteLine(sampleCreationString);
                 }
             }
+
+            using (FileStream fs = new FileStream(@"C:\tmp\Style.css", FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                {
+                    sw.WriteLine(CssBuilder);
+                }
+            }
+            #endregion
+
         }
     }
 }

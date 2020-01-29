@@ -1,0 +1,66 @@
+﻿<style>
+body {
+    background-color: violet;
+    font-size: 100%;
+    font-family ="Times New Roman",Georgia,Seriff;
+    color: white;
+}
+
+.underline {
+    border-bottom: 2px solid red;
+}
+
+.class1 {
+    font-size: 0.8em;
+}
+
+.different {
+    background-color: black font-size: 0.9em;
+    font-weight: 900;
+    font-style: italic;
+    color =red;
+}
+
+.cytat {
+    background-color: rgba(255,0,255, 0.9);
+    font-style: italic;
+    font-size: 1.2em;
+    text-align: right;
+    color: white;
+}
+
+    .cytat:before {
+        content: '"';
+    }
+
+    .cytat:after {
+        content: '"';
+    }
+
+.diff2 {
+    font-size: 1.1em;
+}
+
+.rz {
+    list-style-type: upper-roman;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 2px solid blue;
+}
+
+th {
+    background-color: SlateBlue;
+    text-align: middle;
+}
+
+td {
+    background-color: DodgerBlue;
+    text-align: middle;
+}
+</style>
