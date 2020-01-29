@@ -15,7 +15,8 @@ body {
 }
 
 .different {
-    background-color: black font-size: 0.9em;
+    background-color: black;
+    font-size: 0.9em;
     font-weight: 900;
     font-style: italic;
     color =red;
@@ -56,11 +57,11 @@ table, th, td {
 
 th {
     background-color: SlateBlue;
-    text-align: middle;
+    text-align: center;
 }
 
 td {
     background-color: DodgerBlue;
-    text-align: middle;
+    text-align: center;
 }
 </style>

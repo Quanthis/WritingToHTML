@@ -22,40 +22,49 @@ namespace WritingToHTML
             StringBuilder CssBuilder = new StringBuilder("");
 
             #region DownloadingData
-            using (FileStream fs = new FileStream(@"HTML_CSS\HTMLPage1.html", FileMode.Open))
+            Parallel.Invoke(() =>
             {
-                using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+                using (FileStream fs = new FileStream(@"HTML_CSS\HTMLPage1.html", FileMode.Open))
                 {
-                    sampleCreationString.Append(sr.ReadToEnd());
+                    using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+                    {
+                        sampleCreationString.Append(sr.ReadToEnd());
+                    }
                 }
-            }
-
-            using (FileStream fs = new FileStream(@"HTML_CSS\Style.css", FileMode.Open))
-            {
-                using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+            },
+             () =>
                 {
-                    CssBuilder.Append(sr.ReadToEnd());
-                }
-            }
+                    using (FileStream fs = new FileStream(@"HTML_CSS\Style.css", FileMode.Open))
+                    {
+                        using (StreamReader sr = new StreamReader(fs, Encoding.Unicode))
+                        {
+                            CssBuilder.Append(sr.ReadToEnd());
+                        }
+                    }
+                });
             #endregion
 
 
             #region CreateFiles
-            using (FileStream fs = new FileStream(@"C:\tmp\test.html", FileMode.Create))
+            Parallel.Invoke(() =>
             {
-                using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                using (FileStream fs = new FileStream(@"C:\tmp\test.html", FileMode.Create))
                 {
-                    sw.WriteLine(sampleCreationString);
+                    using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                    {
+                        sw.WriteLine(sampleCreationString);
+                    }
                 }
-            }
-
-            using (FileStream fs = new FileStream(@"C:\tmp\Style.css", FileMode.Create))
+            }, () =>
             {
-                using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                using (FileStream fs = new FileStream(@"C:\tmp\Style.css", FileMode.Create))
                 {
-                    sw.WriteLine(CssBuilder);
+                    using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                    {
+                        sw.WriteLine(CssBuilder);
+                    }
                 }
-            }
+            });
             #endregion
 
         }
